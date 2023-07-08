@@ -1,0 +1,14 @@
+{
+  "name": "backend-server",
+  "version": "1.0.0",
+  "description": "A server that provides geolocation information based on IP addresses",
+  "main": "index.js", 
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Akshay Kannan",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  } 
+}

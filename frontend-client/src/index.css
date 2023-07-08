@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+body{
+background-color: var(--color-bg);
+font-family: 'Poppins', sans-serif;
+color: var(--color-white); /* color property is inherited: */
+}
+
+:root{
+  --color-bg: rgb(64, 96, 176);
+  --color-white: white;
+
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 500; /* Font weight refers to the thickness/boldness of text */
+}
+
+h1{
+  font-size: 2.5rem;
+}
+
