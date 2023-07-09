@@ -1,0 +1,26 @@
+.InputFormContainer{
+    text-align: center;
+    position:relative;
+    top: 5em;
+    
+}
+.InputContainer{
+    width: 35%;
+    border-radius: 0.5em;
+    text-align: center;
+    height: 2em;
+    margin-top: 1em;
+}
+
+.ButtonContainer{
+    margin-top: 0.5em;
+}
+
+.ErrorMessageContainer{
+    font-size: 12px;
+    font-weight: 500;
+    
+}
+
+
+

@@ -1,5 +1,6 @@
 import React from 'react'
 import {useState} from 'react' /* Importing the 'useState' hook */
+import '../InputForm/InputForm.css'
 
 function InputForm() {
   const[ipAddress, SetIpAddress] = useState('')
@@ -32,27 +33,33 @@ function InputForm() {
     }
 }
 
-
-
-
-
-  return (
+return (
     <section className='InputFormContainer'>
 
       {/*Block-Level Element*/}
       <form onSubmit={handleSubmit}> {/*Refers to handleSubmit (Assigned to a function) when the 'Submit' event is called on this element*/}
       {/*In-Line Element*/}
-      <input type='text' value={ipAddress} onChange={(e) => SetIpAddress(e.target.value)} placeholder='Enter an IP address'> 
+      <input type='text' value={ipAddress} onChange={(e) => SetIpAddress(e.target.value)} placeholder='Enter an IP address' className='InputContainer'> 
       {/*type attribute specifies the type of input control to display */} 
-      {/*value attribute sets the initial value of the input field*/}
+      {/*value attribute sets the initial value of the input field to the value contained in ipAddress*/}
       {/*onChange attribute triggers the SetIpAddress function when the value of the input field is changed: When value of input
       field is changed, it updates the current value of ipAddress*/}
       </input>
 
-      </form>
+      <div></div>
 
-      
+      <button type='submit' className='ButtonContainer'> {/*In-Line element*/}
+      Submit                 {/*The type attribute being set to submit triggers the submit event on the ancestral form element*/}
+      </button>
+
+      {error && <p className='ErrorMessageContainer'>{error}</p>} {/*This is called conditional rendering: The && operation means that the first falsy value will be rendered. If none of the 
+      values are falsy, it renders(returns) the last truthy value.*/}
+      {/*If error == null, that is a falsy, and error will be returned. But since this is not an element, nothing will be displayed. <p> --- </ p> will always be
+      truthy since it is a valid HTML element, hence if error is not null (truthy), the last truthy value [element p] will be rendered. */}
+
+    </form>
     </section>
+     
   )
 };
 
