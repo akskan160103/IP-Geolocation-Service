@@ -27,6 +27,7 @@ function InputForm() {
   
     if (validateIP(ipAddress)) {
     SetError(null); /* Clear the error message if the IP address is valid */
+    fetch(`http://localhost:3000/ip/${ipAddress}`) /*Using fetch function to send a GET request to the server*/
     } 
     else {
     SetError('Please enter a valid IP address.'); /* Set an error message if the IP address is not valid */
