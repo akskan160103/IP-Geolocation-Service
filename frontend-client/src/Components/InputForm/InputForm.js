@@ -27,7 +27,9 @@ function InputForm() {
   
     if (validateIP(ipAddress)) {
     SetError(null); /* Clear the error message if the IP address is valid */
-    fetch(`http://localhost:3000/ip/${ipAddress}`) /*Using fetch function to send a GET request to the server*/
+    fetch(`http://localhost:3001/ip/${ipAddress}`) /*Using fetch function to send a GET request to the server*/
+    /*Note: The $ works exactly like the '+' operator in Java, where non-string operands are automatically converted to strings and then concatenated.
+    This is unlike in C++, where the '+' operator requires both the operands to be of string type. */
     } 
     else {
     SetError('Please enter a valid IP address.'); /* Set an error message if the IP address is not valid */
