@@ -42,6 +42,32 @@ Let's understand this using an example 1.0.0.0/24
 - Hence, in this case we have range of IP address 1.0.0.X (where X is from 0 to 255).
 - Hence, we can represent **a range of IPv4 IP addresses** using the CIDR Notation.
 
+## Callback functions ##
+- A callback function {in JavaScript} is a function passed as an argument inside another function.
+- A callback function can either be pre-defined OR defined only when called {Instantaneous Definition}.
+- It is achieved using the `function` keyword when using traditional syntax
+- E.g: 
+``` javascript
+MongoClient.connect(url, function(err, client) {
+    if (err) 
+    throw err;
+    
+    const db = client.db('your_database_name');  // replace with your database name
+    }
+)
+```
+## `async` and `await` Keyword ##
+- `async` is a keyword used to define an **asynchronous** function.
+- An asynchronous function **always** returns a **promise**.
+- A **promise** is an object whose values may or may not be available yet but will be in the future.
+- A promise is said to be **resolved** if the value of the object is now available.
+- The `await` keyword can **only** be used beside a statement inside an asynchronous function.
+- It makes sure that the statement that it is beside finishes executing before proceeding to the next one.
+- JS is single-threaded unlike C++ and hence can proceed to the next statement before it finishes executing the current one.
+
+
+
+
 
 
 

@@ -25,7 +25,7 @@ function InputForm() {
     e.preventDefault(); //preventDefault is a member method of an event object. It prevents the default behavior associated with an event from taking place.
     //In this case, the event is: 'Form Submission' and the default behavior is: 'Refreshing the page when the form has been submitted'
   
-    if (validateIP(ipAddress)) {
+    if (validateIP(ipAddress)) { 
     SetError(null); /* Clear the error message if the IP address is valid */
     fetch(`http://localhost:3001/ip/${ipAddress}`) /*Using fetch function to send a GET request to the server*/
     /*Note: The $ works exactly like the '+' operator in Java, where non-string operands are automatically converted to strings and then concatenated.
