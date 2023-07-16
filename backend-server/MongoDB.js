@@ -1,70 +1,72 @@
 console.log('Starting Script');
 
-const MongoClient = require('mongodb').MongoClient; //MongoClient is a constant variable assigned to the MongoClient object of the mongodb module
+const MongoClient = require('mongodb').MongoClient; 
 console.log('Done importing the module');
-const url = 'mongodb://localhost:27017';
+const url = 'mongodb://localhost:27017/GeoLite2';
+const { ConvertIPToNumber } = require('../backend-server/index');
 
 
 
-    MongoClient.connect(url, async (err, client) => { 
-    if (err) {
-    console.log('Error while connecting to the server:', err);
-    throw err;
+
+
+(async function() {
+    try {
+        const client = await MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true, connectTimeoutMS: 5000 });
+        console.log('Successfully connected to the server');
+        
+        const db = client.db('GeoLite2');  
+        
+        /*To Display the number of documents that have already been updated: */
+        const count = await db.collection('cityBlocks').countDocuments({ "startIPNumeric": { $exists: true } });
+        console.log(`Number of documents updated: ${count}`);
+
+        console.log('Successfully opened the GeoLite2 database');
+
+        console.log('Starting to Update the database');
+        await UpdateDataBase(db);
+        console.log('Finished updating the database');
+
+        client.close(); 
+        console.log('Closed the connection');
+    } catch (err) {
+        console.log('Connection error:', err);
     }
-    /*At this point, client object contains all the databases in the MongoDB server
-    you've connected to: */
-
-    console.log('Successfully connected to the server');
-    
-    // Assigning db const variable with the GeoLite2 database:
-    const db = client.db('GeoLite2');  
-    console.log('Successfully opened the GeoLite2 database');
-
-    //Call Update Function Here: 
-    console.log('Starting to Update the database');
-    await UpdateDataBase(db);
-    console.log('Finished updating the database');
-
-    client.close(); 
-    console.log('Closed the connection');
-}
-)
+})();
 
 
-async function UpdateDataBase(db)
-{
-    //Assigning the const collection variable with a collection object pointing to cityBlocks:
+async function UpdateDataBase(db) {
     const collection = db.collection('cityBlocks');
 
-    /*The find function matches all the documents in the collection
-    since the query string is empty {No conditions}
-    
-    These matched documents are converted into an array to make it easier to manipulate*/
-    const documents = await collection.find({}).toArray();
+    // Check if the collection has documents
+    const docCount = await collection.countDocuments();
+    console.log(`Total documents in collection: ${docCount}`);
 
-    for(let i=0; i<documents.length; i++)
-    {
-        doc=documents[i];
-        const [startIP, mask] = doc.network.split('/'); // Extract the starting IP and mask from the CIDR notation
+    const cursor = collection.find();
+    let counter = 0;
 
-        const startIPNumeric = convertIPToNumber(startIP);
-        const endIPNumeric = startIPNumeric + Math.pow(2, 32 - parseInt(mask)) - 1; // Calculate the numeric representation of the end IP
+    for (let doc = await cursor.next(); doc != null; doc = await cursor.next()) {
 
-        await collection.updateOne({_id: doc._id}, {$set: {startIPNumeric: startIPNumeric, endIPNumeric: endIPNumeric}});
-
-        if ((i+1) % 1000 === 0) {
-            console.log(`${i+1} documents updated.`);
+        if (!doc.network || typeof doc.network !== 'string') {
+            console.error(`Invalid network field for document: `, doc);
+            continue;  // skip to the next document
         }
 
+        //console.log('Processing document: ', doc);
+
+        const [startIP, mask] = doc.network.split('/');
+        const startIPNumeric = ConvertIPToNumber(startIP);
+        const endIPNumeric = startIPNumeric + Math.pow(2, 32 - parseInt(mask)) - 1;
+        const updateResult = await collection.updateOne({_id: doc._id}, {$set: {startIPNumeric: startIPNumeric, endIPNumeric: endIPNumeric}});
+
+        //console.log('Update Result: ', updateResult);
+
+        counter++;
+        
+        if (counter % 10000 === 0) {
+            console.log(`${counter} documents updated.`);
+        }
+        
     }
 
-    /*The async function returns a promise object which has been resolved */
-    /*In this case, it has been resolved with an undefined value: */
-
+    console.log(`Update finished, total ${counter} documents updated.`);
 };
-
-
-
-
-
-

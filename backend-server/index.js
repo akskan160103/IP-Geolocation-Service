@@ -42,6 +42,8 @@ function ConvertIPToNumber(ipAddress)
 
   return numericIP;
 }
+module.exports.ConvertIPToNumber = ConvertIPToNumber;
+
 
 
 
