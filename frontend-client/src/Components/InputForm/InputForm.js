@@ -27,13 +27,43 @@ function InputForm() {
   
     if (validateIP(ipAddress)) { 
     SetError(null); /* Clear the error message if the IP address is valid */
-    fetch(`http://localhost:3001/ip/${ipAddress}`) /*Using fetch function to send a GET request to the server*/
+
+    /*Using fetch function to send a GET request to the server*/
     /*Note: The $ works exactly like the '+' operator in Java, where non-string operands are automatically converted to strings and then concatenated.
     This is unlike in C++, where the '+' operator requires both the operands to be of string type. */
+    fetch(`http://localhost:3001/ip/${ipAddress}`).then((response) => {
+      if(response.status == 404)
+      {
+        <div className='ErroMessageType1'>
+          <p>Sorry, we couldn't find this IP address in our database.</p>
+        </div>
+      }
+      let data=response.json(); //Extracts the response body {as an object} from the <res> object
+
+      PrintInformation(data);
+
+    })
+
+
+
+
     } 
     else {
     SetError('Please enter a valid IP address.'); /* Set an error message if the IP address is not valid */
     }
+}
+
+//Displays the relevant information in the frontend:
+PrintInformation(data)
+{
+  <div className='PrintInfo'>
+  {data.network && <p>Network Range: {data.network}</p>}
+  {data.longitude && <p>Longitude: {data.longitude}</p>}
+  {data.latitude && <p>Latitude: {data.latitude}</p>}
+  {data.subdivision && <p>Subdivision: {data.subdivision}</p>}
+  {data.city && <p>City: {data.city}</p>}
+  {data.country && <p>Country: {data.country}</p>}
+  </div>
 }
 
 return (

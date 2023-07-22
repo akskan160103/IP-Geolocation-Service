@@ -33,9 +33,8 @@ const IPQuery = async (ipAddress) =>
     //info is a variable assigned to the value returned by the function:
     let info = Display(cityBlocksDoc, cityLocationsDoc);
 
-    return info; //This is the value of the resolved promise:
-
     client.close();
+    return info; //This is the value of the resolved promise:
 }
 
 module.exports.IPQuery=IPQuery;
@@ -48,18 +47,13 @@ function Display(cityBlocksDoc, cityLocationsDoc)
 
     //Note: Attributes can be added to objects instantaneously without previous declaration
     //Think of objects in JS as an <unordered_map> in C++
-    if(cityBlocksDoc != null)
-    {
+       
+    
         info.network=(cityBlocksDoc.network || 'Unavailable');
         info.longitude=(cityBlocksDoc.longitude || 'Unavailable');
         info.latitude=(cityBlocksDoc.latitude || 'Unavailable');
-    }
-    else
-    {
-        info.network= 'Unavailable';
-        info.longitude='Unavailable';
-        info.latitude='Unavailable';
-    }
+    
+  
     if(cityLocationsDoc != null)
     {
         info.subdivision=(cityLocationsDoc.subdivision_1_name || 'Unavailable');
