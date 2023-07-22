@@ -15,6 +15,7 @@ There exist two types of languages: Markup Languages and Programming Languages.
 **fetch:**
 - It is an in-built JavaScript method (Not part of the Express.js framework)
 - It can be used to make **all** types of HTTP requests (including GET and POST) to a server.
+- It is an **asynchronous** function whose promise resolves to the response object.
 
 ## Important Coding Snippets:
 
@@ -27,6 +28,18 @@ app.get('/ip/:address', (req, res) => {}
 - `app ` has been assigned to an application object of the Express.js module. 
 - **:address** signifies that the address variable is a route parameter. It can be accessed from req.param.address. 
 - When a **GET** request is received at `'/ip/:address'`, the arrow function is executed {The body is currently blank}
+
+2. 
+``` javascript
+ let result=await collection.findOne({
+        startIPNumeric: {$lte:ipAddress }, 
+        endIPNumeric: {$gte: ipAddress}
+    })
+```
+- findOne is a member function within the collection class in the MongoDB module: It is **NOT** provided by JavaScript by default unlike the **fetch** method.
+- The function returns the **first** document object which matches the query parameters.
+- $lte: less than or equal to  
+  $gte: greater than or equal to
 
 ## IP Addresses:
 **IPv4** is a fomrat for representing a single IP Address: 
@@ -64,6 +77,43 @@ MongoClient.connect(url, function(err, client) {
 - The `await` keyword can **only** be used beside a statement inside an asynchronous function.
 - It makes sure that the statement that it is beside finishes executing before proceeding to the next one.
 - JS is single-threaded unlike C++ and hence can proceed to the next statement before it finishes executing the current one.
+
+## Rough Coding Snippets To Include - Won't be included in final information.md
+
+1. 
+``` javascript
+function validateData(doc) {
+    let validatedData = {};
+
+    if (doc.network) {
+        validatedData.network = doc.network;
+    }
+
+    if (doc.latitude && doc.longitude) {
+        validatedData.location = {
+            latitude: doc.latitude,
+            longitude: doc.longitude,
+        };
+    }
+
+    if (doc.city_name) {
+        validatedData.cityName = doc.city_name;
+    }
+
+    if (doc.subdivision_1_name) {
+        validatedData.subdivision = doc.subdivision_1_name;
+    }
+
+    if (doc.country_name) {
+        validatedData.country = doc.country_name;
+    }
+
+    return validatedData;
+}
+```
+- To display the required fields.
+
+
 
 
 

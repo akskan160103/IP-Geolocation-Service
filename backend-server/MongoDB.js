@@ -22,9 +22,9 @@ const { ConvertIPToNumber } = require('../backend-server/index');
 
         console.log('Successfully opened the GeoLite2 database');
 
-        console.log('Starting to Update the database');
+        console.log('Starting to Update the database'); 
         await UpdateDataBase(db);
-        console.log('Finished updating the database');
+        console.log('Finished updating the database');      
 
         client.close(); 
         console.log('Closed the connection');

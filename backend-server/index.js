@@ -6,6 +6,7 @@ const app = express();
 
 const port = 3001; // Defines the port number in which the server will run 
 
+const { IPQuery } = require('../backend-server/IpLookup');
 
 //This line starts the server and makes it listen for requests in the specified port: In this case - 3001. 
 app.listen(port, () => {
@@ -23,7 +24,18 @@ app.get('/', (req, res) => {
 
 app.get('/ip/:address', (req, res) => {
 const ipAddress=req.params.address;
-console.log('Unique Number is: ', ConvertIPToNumber(ipAddress)); 
+try{
+  IPQuery(ipAddress).then((object) => {
+    res.send(object);
+  } );
+
+}
+/*Note: error is the name of a reference to the Error object that was thrown: */
+catch (error)
+{
+  res.status(404); // This is the standard convention BUT it is not necessary:
+}
+
 }); 
 
 
