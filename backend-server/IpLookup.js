@@ -1,12 +1,13 @@
 const MongoClient = require('mongodb').MongoClient; 
 const url = 'mongodb://localhost:27017/GeoLite2';
-const { ConvertIPToNumber } = require('../backend-server/index');
+const { ConvertIPToNumber } = require('../backend-server/Helpers');
 
 const IPQuery = async (ipAddress) =>
 {
     const client = await MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true, connectTimeoutMS: 5000 });
     const db = client.db('GeoLite2');  
     const collection=db.collection('cityBlocks');
+    
     let numericIpAddress=ConvertIPToNumber(ipAddress);
 
     // Note: findOne is a member function of the <collection> object within the MongoDB module:

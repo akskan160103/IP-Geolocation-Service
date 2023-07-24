@@ -6,8 +6,6 @@ const app = express();
 
 const port = 3001; // Defines the port number in which the server will run 
 
-const { IPQuery } = require('../backend-server/IpLookup');
-
 //This line starts the server and makes it listen for requests in the specified port: In this case - 3001. 
 app.listen(port, () => {
   console.log(`Server listening at http://localhost:${port}`); // This second argument is displayed as confirmation that the server is up and running 
@@ -39,22 +37,6 @@ catch (error)
 }); 
 
 
-//Each IPv4 formatted IP address will be converted into a unique number:
-function ConvertIPToNumber(ipAddress) 
-{
-  const ipSegments = ipAddress.split('.'); // Splits the IP address into its four segments
-  let numericIP = 0;
-
-  // Convert each segment and add it to numericIP
-  for (let i = 0; i < ipSegments.length; i++) {
-    numericIP = numericIP * 256;
-    numericIP += Number(ipSegments[i]);
-    /*Number(---) in JS is analogous to stoi in C++ */
-  }
-
-  return numericIP;
-}
-module.exports.ConvertIPToNumber = ConvertIPToNumber;
 
 
 

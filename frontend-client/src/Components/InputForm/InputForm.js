@@ -21,50 +21,32 @@ function InputForm() {
   };
 
 
-  const handleSubmit = (e) => {
-    e.preventDefault(); //preventDefault is a member method of an event object. It prevents the default behavior associated with an event from taking place.
-    //In this case, the event is: 'Form Submission' and the default behavior is: 'Refreshing the page when the form has been submitted'
-  
-    if (validateIP(ipAddress)) { 
-    SetError(null); /* Clear the error message if the IP address is valid */
+  // Use a state to store the information from server
+const [info, setInfo] = useState({});
 
-    /*Using fetch function to send a GET request to the server*/
-    /*Note: The $ works exactly like the '+' operator in Java, where non-string operands are automatically converted to strings and then concatenated.
-    This is unlike in C++, where the '+' operator requires both the operands to be of string type. */
-    fetch(`http://localhost:3001/ip/${ipAddress}`).then((response) => {
-      if(response.status == 404)
-      {
-        <div className='ErroMessageType1'>
-          <p>Sorry, we couldn't find this IP address in our database.</p>
-        </div>
-      }
-      let data=response.json(); //Extracts the response body {as an object} from the <res> object
+const handleSubmit = (e) => {
+  e.preventDefault();
 
-      PrintInformation(data);
+  if (validateIP(ipAddress)) {
+    SetError(null);
 
-    })
-
-
-
-
-    } 
-    else {
-    SetError('Please enter a valid IP address.'); /* Set an error message if the IP address is not valid */
-    }
+    fetch(`http://localhost:3001/ip/${ipAddress}`)
+      .then((response) => {
+        if (response.status === 404) {
+          SetError('Sorry, we could not find this IP address in our database.');
+          throw new Error('Not found'); // stop promise chain
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setInfo(data); // Update the information with the fetched data
+      })
+      .catch((err) => console.error(err)); // Add error handling
+  } else {
+    SetError('Please enter a valid IP address.');
+  }
 }
 
-//Displays the relevant information in the frontend:
-PrintInformation(data)
-{
-  <div className='PrintInfo'>
-  {data.network && <p>Network Range: {data.network}</p>}
-  {data.longitude && <p>Longitude: {data.longitude}</p>}
-  {data.latitude && <p>Latitude: {data.latitude}</p>}
-  {data.subdivision && <p>Subdivision: {data.subdivision}</p>}
-  {data.city && <p>City: {data.city}</p>}
-  {data.country && <p>Country: {data.country}</p>}
-  </div>
-}
 
 return (
     <section className='InputFormContainer'>
@@ -91,6 +73,14 @@ return (
       truthy since it is a valid HTML element, hence if error is not null (truthy), the last truthy value [element p] will be rendered. */}
 
     </form>
+    <div className='PrintInfo'>
+      {info.network && <p>Network Range: {info.network}</p>}
+      {info.longitude && <p>Longitude: {info.longitude}</p>}
+      {info.latitude && <p>Latitude: {info.latitude}</p>}
+      {info.subdivision && <p>Subdivision: {info.subdivision}</p>}
+      {info.city && <p>City: {info.city}</p>}
+      {info.country && <p>Country: {info.country}</p>}
+    </div>
     </section>
      
   )
