@@ -29,10 +29,10 @@ const handleSubmit = (e) => {
 
   if (validateIP(ipAddress)) {
     SetError(null);
-
+    console.log('About to fetch');
     fetch(`http://localhost:3001/ip/${ipAddress}`)
       .then((response) => {
-
+        console.log('Back in frontend'); 
         if (response.status === 404) {
           response.json().then((data) => {
             SetError(data.message); 
@@ -44,6 +44,7 @@ const handleSubmit = (e) => {
       })
       .then((data) => {
         setInfo(data); // Update the information with the fetched data
+        console.log('info is:', info);
       })
       .catch((err) => console.error(err)); // Add error handling
   } 

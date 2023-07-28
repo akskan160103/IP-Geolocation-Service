@@ -6,11 +6,12 @@ const app = express();
 
 const port = 3001; // Defines the port number in which the server will run 
 
+const { IPQuery } = require('../backend-server/IpLookup');
+
 //This line starts the server and makes it listen for requests in the specified port: In this case - 3001. 
 app.listen(port, () => {
   console.log(`Server listening at http://localhost:${port}`); // This second argument is displayed as confirmation that the server is up and running 
 });
-
 /*This is just for practice and understanding:*/
 // '/' refers to the root url where the application object (assigned to app) is listening to incoming requests
 // When a GET request is sent to '/.....': A url within Port 3000, execute the arrow function.
@@ -23,14 +24,17 @@ app.get('/', (req, res) => {
 app.get('/ip/:address', (req, res) => {
 const ipAddress=req.params.address;
 try{
+  console.log('Received the request');
   IPQuery(ipAddress).then((object) => {
     res.send(object);
+    console.log('What is contained in <object> is:', object);
   } );
 
 }
 /*Note: error is the name of a reference to the Error object that was thrown: */
 catch (error)
 {
+  console.log(error);
   res.status(404); // This is the standard convention BUT it is not necessary:
   res.send('IP Address was not found in our database.'); 
 }

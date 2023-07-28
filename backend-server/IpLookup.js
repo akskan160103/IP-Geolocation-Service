@@ -4,7 +4,9 @@ const { ConvertIPToNumber } = require('../backend-server/Helpers');
 
 const IPQuery = async (ipAddress) =>
 {
+
     const client = await MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true, connectTimeoutMS: 5000 });
+    console.log('Connected with MongoDB');
     const db = client.db('GeoLite2');  
     const collection=db.collection('cityBlocks');
     
@@ -12,10 +14,13 @@ const IPQuery = async (ipAddress) =>
 
     // Note: findOne is a member function of the <collection> object within the MongoDB module:
     // result is a variable assigned to the document in cityBlocks collection that matches the query parameters:
-    let cityBlocksDoc=await collection.findOne({
+    let cityBlocksDoc=await collection.findOne({ 
         startIPNumeric: {$lte:numericIpAddress}, 
         endIPNumeric: {$gte: numericIpAddress}
     })
+
+    console.log('Done searching through cityBlocks collection');
+    console.log(cityBlocksDoc);
 
     // <result> will be null if no document in the collection matched the query parameters:
     if(cityBlocksDoc == null)
@@ -30,9 +35,13 @@ const IPQuery = async (ipAddress) =>
     cityLocationsDoc=await cityLocationsCollection.findOne({
         geoname_id: cityBlocksDoc.geoname_id
     });
+
+    console.log('Done finding corresponding doc in cityLocations'); 
+    console.log(cityLocationsDoc);
     
     //info is a variable assigned to the value returned by the function:
     let info = Display(cityBlocksDoc, cityLocationsDoc);
+    console.log(info);
 
     client.close();
     return info; //This is the value of the resolved promise:
