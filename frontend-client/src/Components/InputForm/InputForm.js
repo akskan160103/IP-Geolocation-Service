@@ -32,17 +32,23 @@ const handleSubmit = (e) => {
 
     fetch(`http://localhost:3001/ip/${ipAddress}`)
       .then((response) => {
+
         if (response.status === 404) {
-          SetError('Sorry, we could not find this IP address in our database.');
-          throw new Error('Not found'); // stop promise chain
+          response.json().then((data) => {
+            SetError(data.message); 
+          });
+          
+          throw new Error('Not found'); // Stop the Promise Chain: 
         }
-        return response.json();
+        return response.json(); // <return> is used to pass the resolved promise <response.json> as a parameter <data> in the next .then function
       })
       .then((data) => {
         setInfo(data); // Update the information with the fetched data
       })
       .catch((err) => console.error(err)); // Add error handling
-  } else {
+  } 
+  else 
+  {
     SetError('Please enter a valid IP address.');
   }
 }

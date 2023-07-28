@@ -32,6 +32,7 @@ try{
 catch (error)
 {
   res.status(404); // This is the standard convention BUT it is not necessary:
+  res.send('IP Address was not found in our database.'); 
 }
 
 }); 
