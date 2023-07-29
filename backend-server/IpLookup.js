@@ -30,7 +30,7 @@ const IPQuery = async (ipAddress) =>
     
     const cityLocationsCollection=db.collection('cityLocations');
     let cityLocationsDoc;
-
+ 
  
     cityLocationsDoc=await cityLocationsCollection.findOne({
         geoname_id: cityBlocksDoc.geoname_id

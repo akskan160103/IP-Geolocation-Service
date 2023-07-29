@@ -1,12 +1,17 @@
+const cors = require('cors');
+
+
 const express = require('express'); // express is a constant variable which is assigned to an express.js module: A module contains specific files which offer functionality of the node package; HOWEVER, I will use it interchangeably
 
 /* app is a constant variable assigned to an application object of the express.js module
 An application object of a module can be used to access methods defined in the package*/
 const app = express(); 
+app.use(cors());
+
 
 const port = 3001; // Defines the port number in which the server will run 
 
-const { IPQuery } = require('../backend-server/IpLookup');
+const { IPQuery } = require('../backend-server/IpLookup'); 
 
 //This line starts the server and makes it listen for requests in the specified port: In this case - 3001. 
 app.listen(port, () => {

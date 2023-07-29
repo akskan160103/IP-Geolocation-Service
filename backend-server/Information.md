@@ -78,40 +78,7 @@ MongoClient.connect(url, function(err, client) {
 - It makes sure that the statement that it is beside finishes executing before proceeding to the next one.
 - JS is single-threaded unlike C++ and hence can proceed to the next statement before it finishes executing the current one.
 
-## Rough Coding Snippets To Include - Won't be included in final information.md
-
-1. 
-``` javascript
-function validateData(doc) {
-    let validatedData = {};
-
-    if (doc.network) {
-        validatedData.network = doc.network;
-    }
-
-    if (doc.latitude && doc.longitude) {
-        validatedData.location = {
-            latitude: doc.latitude,
-            longitude: doc.longitude,
-        };
-    }
-
-    if (doc.city_name) {
-        validatedData.cityName = doc.city_name;
-    }
-
-    if (doc.subdivision_1_name) {
-        validatedData.subdivision = doc.subdivision_1_name;
-    }
-
-    if (doc.country_name) {
-        validatedData.country = doc.country_name;
-    }
-
-    return validatedData;
-}
-```
-- To display the required fields.
+## General Pointers:
 
 
 
