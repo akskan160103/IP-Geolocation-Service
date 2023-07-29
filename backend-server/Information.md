@@ -40,6 +40,23 @@ app.get('/ip/:address', (req, res) => {}
 - The function returns the **first** document object which matches the query parameters.
 - $lte: less than or equal to  
   $gte: greater than or equal to
+3. 
+``` javascript
+function OutputDisplay({error, info}) 
+```
+- **OutputDisplay** is not any regular JS function, it is a JS function that returns an HTML element: These are referred to as **React Components**.
+- These special category of functions can only accept an object {commonly referred to as props}.
+- The line ``({error, info})`` essentially defines ``error`` and ``info`` to be the names of members of the props object (Not explicitly defined).
+- The members of the props object will also be available as **attributes** of the OutputDisplay element.
+
+4. 
+``` javascript
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+```
+- ``react-leaflet`` is the name of a library of react components.
+- ``{ MapContainer, TileLayer, Marker, Popup }`` is used to specify the names of certain react components you want to import from the library.
+
+
 
 ## IP Addresses:
 **IPv4** is a fomrat for representing a single IP Address: 
