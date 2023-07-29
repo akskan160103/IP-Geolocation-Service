@@ -79,7 +79,8 @@ MongoClient.connect(url, function(err, client) {
 - JS is single-threaded unlike C++ and hence can proceed to the next statement before it finishes executing the current one.
 
 ## General Pointers:
-
+- When you have a ``console.log`` statement inside your **backend-server** directory, you'll obtain a message within the **terminal**.
+- When you have a ``console.log`` statement inside your **frontend-client** directory, you'll obtain the message in the 
 
 
 

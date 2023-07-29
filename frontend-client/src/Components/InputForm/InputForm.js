@@ -29,6 +29,7 @@ const handleSubmit = (e) => {
 
   if (validateIP(ipAddress)) {
     SetError(null);
+    setInfo({});
     console.log('About to fetch');
     fetch(`http://localhost:3001/ip/${ipAddress}`)
       .then((response) => {
@@ -80,7 +81,9 @@ return (
       truthy since it is a valid HTML element, hence if error is not null (truthy), the last truthy value [element p] will be rendered. */}
 
     </form>
-    <div className='PrintInfo'>
+
+    {!error && 
+    <div className='PrintInfoContainer'>
       {info.network && <p>Network Range: {info.network}</p>}
       {info.longitude && <p>Longitude: {info.longitude}</p>}
       {info.latitude && <p>Latitude: {info.latitude}</p>}
@@ -88,6 +91,7 @@ return (
       {info.city && <p>City: {info.city}</p>}
       {info.country && <p>Country: {info.country}</p>}
     </div>
+  }
     </section>
      
   )
