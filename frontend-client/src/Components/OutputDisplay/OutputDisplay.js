@@ -24,7 +24,7 @@ function OutputDisplay({error, info}) {
     }
 
     {
-    info.latitude && info.longitude && <IpMap info={info} />
+    !error && info.latitude && info.longitude && <IpMap info={info} />
     }
 
     </section>

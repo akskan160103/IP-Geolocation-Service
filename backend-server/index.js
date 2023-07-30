@@ -7,7 +7,7 @@ const express = require('express'); // express is a constant variable which is a
 An application object of a module can be used to access methods defined in the package*/
 const app = express();  
 app.use(cors());
-
+ 
 
 const port = 3001; // Defines the port number in which the server will run 
 
