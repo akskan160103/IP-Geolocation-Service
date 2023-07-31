@@ -6,7 +6,7 @@ const express = require('express'); // express is a constant variable which is a
 /* app is a constant variable assigned to an application object of the express.js module
 An application object of a module can be used to access methods defined in the package*/
 const app = express();  
-app.use(cors());
+app.use(cors()); 
  
 
 const port = 3001; // Defines the port number in which the server will run 
@@ -23,26 +23,22 @@ app.listen(port, () => {
 // req, res are objects which contain information about the GET request and response.
 // Hello World is displayed on the screen
 app.get('/', (req, res) => { 
-  res.send('Hello World Pencho!');
+  res.send('Hello World Pencho!');  
 }); 
 
-app.get('/ip/:address', (req, res) => {
+app.get('/ip/:address', (req, res) => { 
 const ipAddress=req.params.address;
-try{
-  console.log('Received the request');
+
+  console.log('Received the request'); 
   IPQuery(ipAddress).then((object) => {
     res.send(object); 
     console.log('What is contained in <object> is:', object);  
-  } );
+  })
 
-}
-/*Note: error is the name of a reference to the Error object that was thrown: */
-catch (error)
-{
-  console.log(error);
-  res.status(404); // This is the standard convention BUT it is not necessary:
-  res.send('IP Address was not found in our database.'); 
-}
+  .catch((error)=> {
+    console.log(error);
+    res.status(404).send('IP address was not found in the database.'); 
+  });
 
 }); 
 

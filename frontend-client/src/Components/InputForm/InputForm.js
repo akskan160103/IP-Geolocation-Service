@@ -35,20 +35,27 @@ const handleSubmit = (e) => {
     fetch(`http://localhost:3001/ip/${ipAddress}`)
       .then((response) => {
         console.log('Back in frontend'); 
+
         if (response.status === 404) {
           response.json().then((data) => {
-            SetError(data.message); 
+          SetError(data); 
           });
-          
-          throw new Error('Not found'); // Stop the Promise Chain: 
         }
+        else 
+        {//startElse
         return response.json(); // <return> is used to pass the resolved promise <response.json> as a parameter <data> in the next .then function
+        }//endElse
       })
+        
       .then((data) => {
+        if(data)
+        {
         setInfo(data); // Update the information with the fetched data
         console.log('info is:', info);
+        }
       })
-      .catch((err) => console.error(err)); // Add error handling
+    
+    
   } 
   else 
   {

@@ -7,7 +7,7 @@ const IPQuery = async (ipAddress) =>
 
     const client = await MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true, connectTimeoutMS: 5000 });
     console.log('Connected with MongoDB');
-    const db = client.db('GeoLite2');  
+    const db = client.db('GeoLite2');   
     const collection=db.collection('cityBlocks');
     
     let numericIpAddress=ConvertIPToNumber(ipAddress);
