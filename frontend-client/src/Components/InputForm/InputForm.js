@@ -38,7 +38,7 @@ const handleSubmit = (e) => {
 
         if (response.status === 404) {
           response.json().then((data) => {
-          SetError(data); 
+          SetError(data.message); 
           });
         }
         else 

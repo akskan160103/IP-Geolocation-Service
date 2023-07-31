@@ -37,7 +37,7 @@ const ipAddress=req.params.address;
 
   .catch((error)=> {
     console.log(error);
-    res.status(404).send('IP address was not found in the database.'); 
+    res.status(404).json({ message: 'IP address was not found in the database.' }); 
   });
 
 }); 
