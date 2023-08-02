@@ -56,6 +56,49 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 - ``react-leaflet`` is the name of a library of react components.
 - ``{ MapContainer, TileLayer, Marker, Popup }`` is used to specify the names of certain react components you want to import from the library.
 
+5. 
+``` javascript
+function IpMap({info}) {
+  return (
+    <div className='MapContainerClass'>
+    <MapContainer center={[info.latitude, info.longitude]} zoom={13} style={{ height: "100vh", width: "100%" }}>
+    <TileLayer
+      url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+      attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+    /> 
+    <Marker position={[info.latitude, info.longitude]}>
+      <Popup>
+        A pretty CSS3 popup. <br /> Easily customizable.
+      </Popup>
+    </Marker>
+</MapContainer> 
+  </div>
+
+  )
+}
+```
+- `MapContainer` is the name of the React Component which was imported from  `react-leaflet`. The `center` attribute sets the center of the map to the coordinates provided by the `info` object.
+- `TileLayer`  is a React Component which displays the tiles in the map. The `url` attribute is used to attain the tiles from the OpenStreetMap service.
+- The `Marker` React Component is used to put the marker on the relevant location on the map. The `position` attribute is used to set the position of the marker on the map.
+6. 
+``` javascript
+export const icon = new L.Icon({
+  iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+  iconSize: [25, 41], // size of the icon
+  shadowSize: [41, 41], // size of the shadow
+  iconAnchor: [12, 41], // point of the icon which will correspond to marker's location
+  shadowAnchor: [4, 62],  // the same for the shadow
+  popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
+});
+```
+- `new` keyword is used to create an instance of a pre-defined object.
+- `iconUrl`, `iconSize` etc. are pre-defined member variables. You cannot add new member variables over here {which are not defined within the `L.icon` class}
+- ` iconSize: [25, 41] ` is used to assign an array to iconSize
+
+
+
+
 
 
 ## IP Addresses:
@@ -97,7 +140,7 @@ MongoClient.connect(url, function(err, client) {
 
 ## General Pointers:
 - When you have a ``console.log`` statement inside your **backend-server** directory, you'll obtain a message within the **terminal**.
-- When you have a ``console.log`` statement inside your **frontend-client** directory, you'll obtain the message in the 
+- When you have a ``console.log`` statement inside your **frontend-client** directory, you'll obtain the message in the **console** section of the **browser's developer tools**
 
 
 
