@@ -9,7 +9,6 @@ background-size: cover;
 background-color: var(--color-white);
 font-family: 'Poppins', 'sans-serif'; /*font-family property is inherited*/
 color: var(--color-white); /* color property is inherited: */
-border: solid goldenrod;
 }
  
 :root{
