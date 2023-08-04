@@ -1,7 +1,8 @@
 .InputFormContainer{
     text-align: center;
-    position:relative;
-    top: 5em;
+    margin-top: 5em;
+    border-style: solid;
+    border-color: lightpink;
     
 }
 .InputContainer{
@@ -14,6 +15,7 @@
 
 .ButtonContainer{
     margin-top: 0.5em;
+    
 }
 
 

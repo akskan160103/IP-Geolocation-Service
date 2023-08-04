@@ -1,4 +1,4 @@
-# Information
+# Web Development Essentials: Key Concepts and Code Snippets from SpotScope - The IP Geolocation Project:
 
 ## Types of Languages:
 There exist two types of languages: Markup Languages and Programming Languages.

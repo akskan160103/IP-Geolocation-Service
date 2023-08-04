@@ -27,7 +27,7 @@ app.get('/', (req, res) => {
 }); 
 
 app.get('/ip/:address', (req, res) => { 
-const ipAddress=req.params.address;
+const ipAddress=req.params.address; 
 
   console.log('Received the request'); 
   IPQuery(ipAddress).then((object) => {

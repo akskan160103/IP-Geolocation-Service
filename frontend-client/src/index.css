@@ -2,11 +2,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700&display=swap');
 
 body{
-background-color: var(--color-bg);
+background-image: url(./Pictures/anthony-tuil-lS_eDob6DDg-unsplash.jpg);
+background-position: center;
+background-repeat: no-repeat;
+background-size: cover;
+background-color: var(--color-white);
 font-family: 'Poppins', 'sans-serif'; /*font-family property is inherited*/
 color: var(--color-white); /* color property is inherited: */
+border: solid goldenrod;
 }
-
+ 
 :root{
   --color-bg: rgb(64, 96, 176);
   --color-white: white;
