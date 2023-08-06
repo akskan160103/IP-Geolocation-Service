@@ -5,6 +5,13 @@
 .PrintInfoContainer{
     font-size: 14px;
     font-weight: 410; 
+    width: 30%; 
+    border-radius: 2em;
+    background-color: rgb(193, 150, 41);
+    position: relative;
+    left: 50%;
+    transform: translate(-50%,0);
+   
     
    
 }
