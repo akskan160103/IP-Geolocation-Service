@@ -1,14 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700&display=swap');
 
+
+
 body{
+font-family: 'Poppins', 'sans-serif'; /*font-family property is inherited*/
+color: var(--color-white); /* color property is inherited: */
+margin: 0;
 background-image: url(./Pictures/anthony-tuil-lS_eDob6DDg-unsplash.jpg);
 background-position: center;
 background-repeat: no-repeat;
 background-size: cover;
-background-color: var(--color-white);
-font-family: 'Poppins', 'sans-serif'; /*font-family property is inherited*/
-color: var(--color-white); /* color property is inherited: */
+background-color: var(--color-bg); 
+min-height: 100vh; /*Stands for 100% of the viewport height: */
 }
  
 :root{

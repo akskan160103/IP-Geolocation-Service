@@ -1,3 +1,19 @@
+.AppContainer{
+  display:flex;
+  flex-direction: column;
+  min-height: 100vh;
+  border: solid 
+}
+.FooterWrapper{
+  position: relative;
+  flex-grow: 1; 
+  padding: 0;
+  border: solid purple;
+  display: flex;
+  flex-direction: column;
+  margin-top: 3em;
+}
+
 .App {
   text-align: center;
 }

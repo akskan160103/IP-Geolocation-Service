@@ -8,10 +8,12 @@ import InputForm from './Components/InputForm/InputForm';
 
 function App() {
   return ( 
-    <div>
+    <div className='AppContainer'>
       <Header /> 
       <InputForm />
-      <Footer />
+      <div className='FooterWrapper'>
+       <Footer />
+      </div>
     </div>
 
   );  
