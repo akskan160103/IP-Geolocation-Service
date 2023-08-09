@@ -23,9 +23,11 @@ function OutputDisplay({error, info}) {
     </div>
     }
 
+  
     {
     !error && info.latitude && info.longitude && <IpMap info={info} />
     }
+    
 
     </section>
   )
