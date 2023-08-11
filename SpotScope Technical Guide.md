@@ -141,6 +141,9 @@ MongoClient.connect(url, function(err, client) {
 ## General Pointers:
 - When you have a ``console.log`` statement inside your **backend-server** directory, you'll obtain a message within the **terminal**.
 - When you have a ``console.log`` statement inside your **frontend-client** directory, you'll obtain the message in the **console** section of the **browser's developer tools**
+- `mongod --dbpath /data/db2 --port 27018 --bind_ip 0.0.0.0`
+- `ip a` used to know the IP address of VM {Virtual Machine} - In this case WSL Ubuntu
+
 
 
 
