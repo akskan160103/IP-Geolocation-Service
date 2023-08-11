@@ -9,7 +9,7 @@ const app = express();
 app.use(cors()); 
  
 
-const port = 3001; // Defines the port number in which the server will run 
+const port = process.env.PORT || 3001; // Defines the port number in which the server will run: Note - process.env.PORT is an environment variable
 
 const { IPQuery } = require('../backend-server/IpLookup');   
 

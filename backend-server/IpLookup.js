@@ -1,5 +1,5 @@
 const MongoClient = require('mongodb').MongoClient; 
-const url = 'mongodb://localhost:27017/GeoLite2';
+const url = MONGODB_URI || 'mongodb://localhost:27017/GeoLite2';
 const { ConvertIPToNumber } = require('../backend-server/Helpers');
 
 const IPQuery = async (ipAddress) =>
